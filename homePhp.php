@@ -40,17 +40,28 @@
     echo "</div>";
     }
     if (isset($_POST['afficherMessages']) && $_POST['afficherMessages'] == 'AfficherMessages'){
-        $sql = "SELECT message 
+        $sql = "SELECT message, sender, id
                 FROM messages
-                WHERE receiver = ''";
+                WHERE receiver = '$_SESSION[login_user]' AND lu = 0";
         $req = $conn->query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
-        echo "<div id='content-users'>";
+        if(mysqli_num_rows($req)){
+        echo "<div id='content-messages'>";
         while($row = $req->fetch_assoc()){
-            echo "<div class='users'>" .$row["name"]."<a href='sendMessagePhp.php'><button>send message</button></a>    </div>";   
+            echo "<div class='new-message'> Nouveau message de " .$row["sender"]." <form action='' method='POST'><button type ='submit' name='message' value ='$row[id]'>lire message</button></form></div>";   
         }
         echo "</div>";
+    }else{
+        echo "pas de nouveau message";
+    }
+    }
+    
+        if(isset($_POST["message"])){
+            $_SESSION["idMessage"] = $_POST["message"];
+            header("location: LireMessagePhp.php");
+           
         }
-
+    
+    
 
 ?>
 <?php   
