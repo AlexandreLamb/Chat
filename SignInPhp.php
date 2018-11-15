@@ -42,14 +42,8 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
         $isNoErr= FALSE; 
         $GLOBALS["emailErr"] = "Email is required";
 
-      } else {
-       
+      } else {     
         $GLOBALS["email"] = test_input($_POST["email"]);
-        /*if(!searchEmail($GLOBALS["email"],$conn)){
-            $GLOBALS["emailErr"] = "Email is already existing";
-            $isNoErr = FALSE;
-        }*/
-
       }
       if (empty($_POST["password"])) {
         $isNoErr= FALSE;
@@ -65,13 +59,11 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 
 
 if($isNoErr){
-    echo "ee";
-    
     insertUser($conn, $name, $surname, $email, $password);
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $name;
     echo "<div id='inscription-conf'>felicitations vous etes bien inscrits !</br>
-            <a href='http://127.0.0.1/chat/LogginHtml.html'><button id='button-conf'>Ok</button></a>
+            <a href='http://127.0.0.1/chat/LogginPhp.php'><button id='button-conf'>Ok</button></a>
           </div>";   
 }
 

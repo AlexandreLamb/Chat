@@ -23,7 +23,7 @@
 		
       if($count == 1) {
         // $_SESSION['login_user'] = $myusername;
-        header("location: Succes.php");
+        header("location: HomePhp.php");
           
       }else {
          $error = "Your Login Name or Password is invalid";
@@ -66,11 +66,12 @@
             <div style = "margin:30px">
                
                <form action = "" method = "post">
-                  <label>UserName  :</label><input type = "text" name = "username" class = "box"/><br /><br />
+                  <label>UserName  :</label><input type = "text" name = "username" class = "box" value="<?php $_SESSION['email']?>"/><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
                   <input type = "submit" name = "submit" value = " Submit "/><br />
                </form>
-               
+               <?php $_SESSION['email']?>
+               <a href="SigninPhp.php"><button>Inscrivez vous</button></a>
                <div style = "font-size:14px;font-weight:bold;
          color:#FFF; margin-top:10px;background-color:#cc0000;"> <?php echo "$error"; ?></div>
 					
