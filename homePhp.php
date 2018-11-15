@@ -30,12 +30,12 @@
     $conn = connectDB();
 
     if (isset($_POST['afficherUsers']) && $_POST['afficherUsers'] == 'AfficherUsers'){
-    $sql = "SELECT name, surname 
+    $sql = "SELECT name, surname,id 
             FROM users";
     $req = $conn->query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
     echo "<div id='content-users'>";
     while($row = $req->fetch_assoc()){
-        echo "<div class='users'>" .$row["name"]."<a href='sendMessagePhp.php'><button>send message</button></a>    </div>";   
+        echo "<div class='users'>" .$row["name"]."<form action='' method='POST'><button type='submit' name='sendMessage' value='$row[id]'>send message</button></form>    </div>";   
     }
     echo "</div>";
     }
@@ -59,6 +59,10 @@
             $_SESSION["idMessage"] = $_POST["message"];
             header("location: LireMessagePhp.php");
            
+        }
+        if(isset($_POST["sendMessage"])){
+            $_SESSION["idReceiver"] = $_POST["sendMessage"];
+            header("location: SendMessagePhp.php");
         }
     
     
