@@ -1,9 +1,18 @@
+<?php   
+    session_start();
+    ?>
 <html>
 
 <body>
     <div id="content-message">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-        <input type="text" name="message"> <input type="submit">
+        <?php
+            echo "session actuelle avec : " .$_SESSION["login_user"];
+        ?>
+    <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+        <button type="submit" name="afficherUsers" value="AfficherUsers"> afficher les users </button>
+    </form>
+    <form  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+        <button type="submit" name="afficherMessages" value="AfficherMessages"> afficher les messages </button>
     </form>
     </div>
 
@@ -19,16 +28,29 @@
     $serverPassword = "";
     $dbName = "tchat";
     $conn = connectDB();
-    $messages="";
 
-    $message = isset($_POST['message']) ? $_POST['message'] : NULL;
-    showMessage($conn);
-    if(empty($_POST["message"])){
-       
-    }else{
-        insertMessage($_POST["message"], $conn);
-         showMessage($conn);
+    if (isset($_POST['afficherUsers']) && $_POST['afficherUsers'] == 'AfficherUsers'){
+    $sql = "SELECT name, surname 
+            FROM users";
+    $req = $conn->query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
+    echo "<div id='content-users'>";
+    while($row = $req->fetch_assoc()){
+        echo "<div class='users'>" .$row["name"]."<a href='sendMessagePhp.php'><button>send message</button></a>    </div>";   
     }
+    echo "</div>";
+    }
+    if (isset($_POST['afficherMessages']) && $_POST['afficherMessages'] == 'AfficherMessages'){
+        $sql = "SELECT message 
+                FROM messages
+                WHERE receiver = ''";
+        $req = $conn->query($sql) or die('Erreur SQL !<br />'.$sql.'<br />'.mysqli_error());
+        echo "<div id='content-users'>";
+        while($row = $req->fetch_assoc()){
+            echo "<div class='users'>" .$row["name"]."<a href='sendMessagePhp.php'><button>send message</button></a>    </div>";   
+        }
+        echo "</div>";
+        }
+
 
 ?>
 <?php   
@@ -49,7 +71,6 @@
             if($conn->connect_error){
                 die("connection failed : " .$conn->connect_error);
             }
-            echo "connection succes";
             return $conn;
     }
 

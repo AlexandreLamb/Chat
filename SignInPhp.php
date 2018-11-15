@@ -62,6 +62,8 @@ if($isNoErr){
     insertUser($conn, $name, $surname, $email, $password);
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $name;
+    
+        $conn->close();
     echo "<div id='inscription-conf'>felicitations vous etes bien inscrits !</br>
             <a href='http://127.0.0.1/chat/LogginPhp.php'><button id='button-conf'>Ok</button></a>
           </div>";   
@@ -128,7 +130,7 @@ function insertUser($conn, $Name, $Surname, $Email, $Password){
             VALUES ('$Name', '$Surname', '$Email', '$Password')";
            $conn->query($sql) or die("Erreur SQL !". $sql .'<br/>'. mysqli_error());
             $id = $conn->insert_id;
-            $_SESSION['id'] = $id;
+            $_SESSION['id'] = $id; 
     }
     else{
         $GLOBALS["emailErr"]= "email deja utilise !";

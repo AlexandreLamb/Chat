@@ -11,18 +11,18 @@
       // username and password sent from form 
       if ((isset($_POST['username']) && !empty($_POST['username'])) && (isset($_POST['password']) && !empty($_POST['password']))) {
       $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+      $mypassword = md5(mysqli_real_escape_string($db,$_POST['password']));  
+
       
       $sql = "SELECT id FROM users WHERE email = '$myusername' and password = '$mypassword'";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       $count = mysqli_num_rows($result);
-      
-        
+     
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
       if($count == 1) {
-        // $_SESSION['login_user'] = $myusername;
+         $_SESSION['login_user'] = $myusername;
         header("location: HomePhp.php");
           
       }else {
@@ -31,7 +31,9 @@
    } else {
           $error = "Your email or your password are missing";
       }
+      mysqli_free_result($result);
 }
+mysqli_close($db);
 
 ?>
 <html>
@@ -65,7 +67,7 @@
 				
             <div style = "margin:30px">
                
-               <form action = "" method = "post">
+               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
                   <label>UserName  :</label><input type = "text" name = "username" class = "box" value="<?php $_SESSION['email']?>"/><br /><br />
                   <label>Password  :</label><input type = "password" name = "password" class = "box" /><br/><br />
                   <input type = "submit" name = "submit" value = " Submit "/><br />
