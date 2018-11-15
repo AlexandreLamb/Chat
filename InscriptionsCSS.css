@@ -1,0 +1,31 @@
+#title{
+text-align: center;
+}
+#form-inscriptions{
+    position: absolute;
+    left: 41%;
+    background-color: cadetblue;
+    width: 20%;
+}
+#inscription-conf{
+    z-index: 1;
+    position: absolute;
+    left: 41%;
+    top: 33%;
+    text-align: center;
+    width: 273px;
+    height: 63px;
+    background-color: burlywood;
+}
+#button-conf{
+
+}
+.button-inscriptions{
+    margin-left: 88px;
+    margin-bottom: 14px;
+}
+.input-inscriptions{
+    margin-left: 49px;
+    margin-top: 45px;
+
+}
