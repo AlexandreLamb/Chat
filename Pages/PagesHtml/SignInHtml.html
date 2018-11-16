@@ -1,0 +1,38 @@
+
+<html>
+        <head>
+            <meta charset="utf-8" />
+            <title>Inscription</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" type="text/css" media="screen" href="InscriptionsCSS.css" />
+        </head>
+        <body>
+            <div id="title"> Inscription </div>
+            <form id="form-inscriptions" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <input type="text" class="input-inscriptions" name="name" placeholder="Nom" value="<?php echo $name;?>">
+                <span class="error">*
+                    <?php echo $nameErr;?></span>
+                <br><br>
+                <input type="text" class="input-inscriptions" name="surname" placeholder="Prenom" value="<?php echo $surname;?>">
+                <span class="error">*
+                    <?php echo $surnameErr;?></span>
+                <br><br>
+                <input type="email" class="input-inscriptions" name="email" placeholder="email" value="<?php echo $email;?>">
+                <span class="error">*
+                    <?php echo $emailErr;?></span>
+                <br><br>
+                <input type="password" class="input-inscriptions" name="password" placeholder="password">
+                <span class="error">*
+                    <?php echo $passwordErr;?></span>
+                <br><br>
+                <input type="password" class="input-inscriptions" name="passwordConf" placeholder="password">
+                <span class="error">*
+                    <?php echo $passwordConfErr;?></span>
+                <br><br>
+        
+                <input type="submit" class="button-inscriptions" name ="inscription" value="Inscription">
+            </form>
+        
+        </body>
+        
+        </html>

@@ -23,7 +23,7 @@
 		
       if($count == 1) {
          $_SESSION['login_user'] = $myusername;
-        header("location: HomePhp.php");
+        header("location: Pages/PagesPhp/HomePhp.php");
           
       }else {
          $error = "Your Login Name or Password is invalid";
@@ -73,7 +73,7 @@ mysqli_close($db);
                   <input type = "submit" name = "submit" value = " Submit "/><br />
                </form>
                <?php $_SESSION['email']?>
-               <a href="SigninPhp.php"><button>Inscrivez vous</button></a>
+               <a href="Pages/PagesPhp/SigninPhp.php"><button>Inscrivez vous</button></a>
                <div style = "font-size:14px;font-weight:bold;
          color:#FFF; margin-top:10px;background-color:#cc0000;"> <?php echo "$error"; ?></div>
 					
